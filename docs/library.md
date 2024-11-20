@@ -56,7 +56,7 @@ await sendAndConfirmRawTransaction(connection, transaction.serialize(), { commit
 | feePayer             | Keypair from '@solana/web3.js'             | Keypair that will pay for transaction fees                           |
 | maxSignatures        | number                                     | Maximum allowed signatures in the transaction including fee payer's  |
 | lamportsPerSignature | number                                     | Maximum transaction fee payment amount in lamports                   |
-| allowedTokens        | core.TokenFee[] from '@solana/octane-core' | List of tokens that can be used for Octane fees with associated info |
+| allowedTokens        | core.TokenFee[] from '@candypay/solana-octane-core' | List of tokens that can be used for Octane fees with associated info |
 | cache                | Cache from 'cache-manager'                 | A cache to store duplicate transactions                              |
 | sameSourceTimeout    | number                                     | An interval for transactions with same token fee source, ms          |
 
@@ -101,7 +101,7 @@ await sendAndConfirmRawTransaction(connection, accountTransaction.serialize(), {
 | feePayer             | Keypair from '@solana/web3.js'             | Keypair that will pay for transaction fees                           |
 | maxSignatures        | number                                     | Maximum allowed signatures in the transaction including fee payer's  |
 | lamportsPerSignature | number                                     | Maximum transaction fee payment amount in lamports                   |
-| allowedTokens        | core.TokenFee[] from '@solana/octane-core' | List of tokens that can be used for Octane fees with associated info |
+| allowedTokens        | core.TokenFee[] from '@candypay/solana-octane-core' | List of tokens that can be used for Octane fees with associated info |
 | cache                | Cache from 'cache-manager'                 | A cache to store duplicate transactions                              |
 | sameSourceTimeout    | number                                     | An interval for transactions with same token fee source, ms          |
 
@@ -144,7 +144,7 @@ const { transaction, quote, messageToken } = await buildWhirlpoolsSwapToSOL(
 | slippingTolerance | Percentage from '@orca-so/common-sdk' | Slipping tolerance relative to transaction                    |
 | cache             | Cache from 'cache-manager'            | A cache to store duplicate transactions                       |
 | sameMintTimeout   | number                                | An interval for swap transactions with same mint and user, ms |
-| feeOptions?       | FeeOptions from '@solana/octane-core' | A fee settings for Octane to charge on this swap              |
+| feeOptions?       | FeeOptions from '@candypay/solana-octane-core' | A fee settings for Octane to charge on this swap              |
 
 #### signGeneratedTransaction
 
@@ -192,7 +192,7 @@ Validates transaction metadata prior to signing by fee payer: fee payer, fee, si
 *Does not* validate instructions.
 
 ```javascript
-import { core } from '@solana/octane-core';
+import { core } from '@candypay/solana-octane-core';
 
 let signature: string;
 try {
@@ -266,7 +266,7 @@ const popularTokenMints = await PayerUtils.getPopularTokens(10);
 Returns token's price info from Jupyter aggregator.
 
 ```javascript
-import { PayerUtils } from '@solana/octane-core';
+import { PayerUtils } from '@candypay/solana-octane-core';
 
 const priceInfo = await PayerUtils.getTokenToNativePriceInfo(mint);
 
@@ -301,8 +301,8 @@ console.log(JSON.stringify(tokenFee.toSerializable()));
 |------------|------------------------------------------------------------|----------------------------------------------------------------------|
 | connection | Connection from '@solana/web3.js'                          | Connection to a Solana node                                          |
 | feePayer   | PublicKey from '@solana/web3.js'                           | Public key of a wallet that will receive fees in associated accounts |
-| tokens     | TokenWithPriceInfo[] from '@solana/octane-core'.PayerUtils | Tokens with mints and price info that should be included             |
-| params     | PricingParams from '@solana/octane-core'.PayerUtils        | Options to set price with margin                                     |
+| tokens     | TokenWithPriceInfo[] from '@candypay/solana-octane-core'.PayerUtils | Tokens with mints and price info that should be included             |
+| params     | PricingParams from '@candypay/solana-octane-core'.PayerUtils        | Options to set price with margin                                     |
 
 #### buildCreateAccountListFromTokenFees
 
@@ -322,7 +322,7 @@ console.log('accounts to create:', createAccounts);
 |------------|--------------------------------------------|----------------------------------------------------------------------|
 | connection | Connection from '@solana/web3.js'          | Connection to a Solana node                                          |
 | feePayer   | PublicKey from '@solana/web3.js'           | Public key of a wallet that will receive fees in associated accounts |
-| tokenFees  | TokenFee[] from '@solana/octane-core'.core | Tokens configured to receive payments                                |
+| tokenFees  | TokenFee[] from '@candypay/solana-octane-core'.core | Tokens configured to receive payments                                |
 
 
 #### createAccounts
@@ -342,7 +342,7 @@ const result = await PayerUtils.createAccounts(connection, ENV_SECRET_KEYPAIR, c
 |----------------|-------------------------------------------------------|-------------------------------------------------|
 | connection     | Connection from '@solana/web3.js'                     | Connection to a Solana node                     |
 | feePayer       | Keypair from '@solana/web3.js'                        | Keypair that will own associated token accounts |
-| createAccounts | CreateAccount[] from '@solana/octane-core'.PayerUtils | Accounts to create                              |
+| createAccounts | CreateAccount[] from '@candypay/solana-octane-core'.PayerUtils | Accounts to create                              |
 
 #### loadSwapRoutesForTokenFees
 
@@ -364,7 +364,7 @@ const routesToSwap = await PayerUtils.loadSwapRoutesForTokenFees(
 | Parameter           | Type                                       | Description                                                                     |
 |---------------------|--------------------------------------------|---------------------------------------------------------------------------------|
 | connection          | Connection from '@solana/web3.js'          | Connection to a Solana node                                                     |
-| tokenFees           | TokenFee[] from '@solana/octane-core'.core | Tokens configured to receive payments, that would be checked for possible swaps |
+| tokenFees           | TokenFee[] from '@candypay/solana-octane-core'.core | Tokens configured to receive payments, that would be checked for possible swaps |
 | thresholdInLamports | number                                     | The minimum amount of SOL lamports to receive from a swap                       |
 | slippage            | number                                     | Accepted slippage for the swap                                                  |
 
@@ -385,5 +385,5 @@ for (const route of routesToSwap) {
 |------------|---------------------------------------------|-------------------------------------------------------|
 | connection | Connection from '@solana/web3.js'           | Connection to a Solana node                           |
 | feePayer   | Keypair from '@solana/web3.js'              | Owner of token accounts                               |
-| route      | Route from '@solana/octane-core'.PayerUtils | Minimum amount of SOL lamports to receive from a swap |
+| route      | Route from '@candypay/solana-octane-core'.PayerUtils | Minimum amount of SOL lamports to receive from a swap |
 
