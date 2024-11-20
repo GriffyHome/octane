@@ -1,5 +1,5 @@
 {
-    "rpcUrl": "https://api.devnet.solana.com",
+    "rpcUrl": "https://api.mainnet-beta.solana.com",
     "maxSignatures": 2,
     "lamportsPerSignature": 5000,
     "corsOrigin": true,
@@ -7,8 +7,8 @@
         "transfer": {
             "tokens": [
                 {
-                    "mint": "__PLACEHOLDER__",
-                    "account": "__PLACEHOLDER__",
+                    "mint": "DkZyKmYBYtBQHU6XJvP9AmmPrN1XMniWkdKJbz9Zr6eA",
+                    "account": "4tcGk7CqTLchsMEabt2G5NFWaKmyB4safvQ7n61UiJ1k",
                     "decimals": 9,
                     "fee": 10000000
                 }
